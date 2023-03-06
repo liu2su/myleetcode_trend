@@ -1,1 +1,28 @@
 27. Remove Element
+1. you can not really delete an element from a array, you are actually covering the odd element with a new one when you deleting the array.
+2. two pointer 的实际作用就是用一层for 循环完成了暴力解法中两层for循环完成的任务。
+   快指针的作用是寻找新数组需要的元素
+   慢指针指向新数组更新时新加入的元素所在的位置
+虽然叫新数组，但是操作确实in-place
+for 循环是为了遍历整个数组寻找新数组所需要的元素，所以循环的终止条件应该是快指针遍历结束,而 if statement 是判断新数组是否需要更新的代码块
+快指针的初始值是第一个元素位置，因为快指针要重新开始遍历整个数组
+慢指针的初始值也是第一个元素位置，因为这是新数组的第一个插入点
+
+code:
+---------------------------------------------------------
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int slow = 0;
+        int fast = 0;
+        for(fast = 0; fast < nums.length; fast ++){
+            if(nums[fast] != val){
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+
+        return slow;
+        
+    }
+}
