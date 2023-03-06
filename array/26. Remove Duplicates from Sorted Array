@@ -1,6 +1,11 @@
 这道题和27题基本逻辑是一致的，使用双指针法来做：
 同样的，快指针遍历整个数组寻找新数组所需的元素。
-slow pointer indicate the index  of the new array where the new element shall put into.
+       slow pointer indicate the index  of the new array where the new element shall put into.
+every time the fast pointe reach to a new index it need to determine if this element is needed by new array
+注意题目中给出array是sorted in non-decreasing order，所以用来判断的if statement 需要比较fast pinter当前指向的元素与慢指针前一个元素（即已经插入的最后一个元素）
+是否相同，如果相同则不更新，如果不同则插入到慢指针指向的位置。
+快慢指针的初始值都是1，因为不论如何第一个元素都会插入到新数组中，所以只需要从第二个元素开始比较。
+
 code:
 ---------------------------------------------
 class Solution {
