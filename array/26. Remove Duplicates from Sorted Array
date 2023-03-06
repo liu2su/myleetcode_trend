@@ -1,1 +1,18 @@
-
+这道题和27题基本逻辑是一致的，使用双指针法来做：
+同样的，快指针遍历整个数组寻找新数组所需的元素。
+slow pointer indicate the index  of the new array where the new element shall put into.
+code:
+---------------------------------------------
+class Solution {
+    public int removeDuplicates(int[] nums) {
+      int fast = 1;
+      int slow = 1;
+      for(fast = 1;fast < nums.length;fast++){
+          if(nums[fast] != nums[slow - 1]){
+              nums[slow] = nums[fast];
+              slow ++;
+            }
+        }
+        return slow;
+    }
+}
