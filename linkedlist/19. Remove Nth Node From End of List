@@ -1,0 +1,34 @@
+这道题代表的思想：
+1. 链表里也可以使用双指针：
+   快指针指向链表中最后一个元素，而慢指针指向什么呢？可以做一个推理，链表删除节点需要用到被删除节点前一个元素。所以我们要知道前一个元素是什么，因此慢指针需要指向
+   被删除节点的前一个元素，删除倒数第n个元素，则将快指针向前挪动n次，再和慢指针一起移动直到快指针指向链表最后一个元素。
+2. 设计到删除节点或者增加节点，都有可能涉及到是否会修改head,所以引入dummynode将修改head的操作normalize
+
+-------------------------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        for(int i = 0; i < n; i ++){
+            fast = fast.next;
+        }
+        while(fast.next!= null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = fast.next;
+        return dummy.next;
+    }
+}
