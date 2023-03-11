@@ -1,1 +1,39 @@
+第一步，检查constraints: 发现存在特殊情况：链表为空,写个if handle 一下
+第二步想到，涉及到了头节点的交换，则使用dummy node 策略
+第三步想到，既然是两两交换，则需要遍历整个链表，需要for循环或者while循环，也许还会用到双指针或者临时节点存储地址。
+根据链表的特性，更改某个节点需要知道前一个节点的地址.
 
+-------------------------------------------------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        if(head.next == null){
+            return head;
+        }
+        ListNode dummy = new ListNode(-1,head);
+        ListNode cur = dummy;
+        ListNode temp1 = null;
+        ListNode temp2 = null;
+        while(cur.next != null && cur.next.next != null){
+            temp1 = cur.next;
+            cur.next = cur.next.next;
+            temp2 = cur.next.next;
+            cur.next.next = temp1;
+            temp1.next = temp2;
+            cur = cur.next.next;
+        }
+        return dummy.next;
+    }
+}
